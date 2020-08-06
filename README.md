@@ -15,8 +15,6 @@ Host two identical web pages and provide their private or public IP, both pages 
 
 
 
-
-
 ## Pre-requisites for most tutorials:
 
 ## Networking: VPC & Internet Gateway
@@ -52,7 +50,7 @@ Subnets are segments or partitions of a network divided by CIDR range.
 * Specify an **IPv4 CIDR** block for the subnet from the range of your VPC: 10.0.1.0/24
 * Create
 
-### Step-4: Route table
+### Step-4: Route table for public subnet
 It specifies which external IP addresses are contactable from a subnet or internet gateway, in this case the private subnet is 
 connected to the NAT Gateway and the public subnet is connected to the internet gateway.
 
@@ -68,13 +66,25 @@ Go to the **Tutorial RT for Public Subnet** route table:
 * Input 0.0.0.0/0 on the **destination** 
 * On the **target** select **Internet Gateway** and the internet gateway my-tutorials-internet-gateway
 * Save routes
-
-| Destination  | Target |
-|  :---   | :---:  |
-| 10.0.0.0/16  | local  |
-| 0.0.0.0/0  | Internet Gateway  |
         
 * Go to the subnet, click on **Edit route table association** and select the **Tutorial RT for Public Subnet**
+
+
+### Step-5: Private Subnet
+**AWS Console** -> **Services** -> **VPC** -> **Subnet**
+* Create subnet
+* Choose **Name Tag**: Tutorial Private Subnet
+* Choose the **VPC**: Tutorials_VPC
+* Choose an **availability zone**: us-east-1a
+* Specify an **IPv4 CIDR** block for the subnet from the range of your VPC: 10.0.2.0/24 (it should not overlap with the other subnet)
+* Create
+
+### Step-6: Route table for private subnet
+**AWS Console** -> **Services** -> **VPC** -> **Route Tables**
+* Create Route Table
+* Choose **Name Tag**:  Tutorial RT for Private Subnet
+* Choose the **VPC**: Tutorials_VPC
+* Create
 
 
 ## Architecture

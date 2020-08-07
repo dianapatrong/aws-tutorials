@@ -150,7 +150,7 @@ pip3 install -r requirements.txt
 ``
 
 #### Step-6.5: Environment variables
-Export the following environment variables in order to not store the user and password in the repository:
+Export the following environment variables only for the sake of not storing the user and password in the repository:
 
 ```
 export rds_user=<user>

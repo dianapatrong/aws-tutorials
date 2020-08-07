@@ -73,3 +73,10 @@ authentication request to our local machine.
 
 ## Architecture
 ![Jumpbox architecture](images/JumpboxArchitecture.png)
+
+
+## Clean-up
+
+* Terminate both EC2 instances
+* Delete the NAT Gateway 
+* Release the Elastic IP

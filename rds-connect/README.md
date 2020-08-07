@@ -1,18 +1,20 @@
 # Connect to RDS using Python
 
-Create an RDS instance that will hold some data
-
 The RDS DB instance only needs to be available to the web server, and not to the public Internet, 
 The web server should be hosted in the public subnet, so that it can reach the public Internet and the RDS DB instance 
 needs to be hosted in a private subnet. The web server is able to connect to the DB instance because it is hosted within the same VPC, but the DB instance
- is not available to the public Internet, providing more security.
+ is not available to the public Internet, providing more security. 
+ 
+## Goal
+Create an RDS instance and upload data to the DB through an EC2 instance using Python, then query the data from a Jupiter Notebook running
+on the EC2 instance. 
 
 ## Step-by-step
 This guide assumes that a VPC, public and private subnet have already been created, refer to the documentation: [Pre-requisites](../README.md). 
 We must have either two private subnets or two public subnets available to create a DB subnet group for a DB instance to use in a VPC. 
 
 
-###Step-1: Create another subnet (which will be private) 
+### Step-1: Create another subnet (which will be private) 
 **AWS Console** -> **Services** -> **VPC** -> Subnet
 * Create subnet
 * Choose **Name Tag**: Another Private Subnet for RDS
@@ -22,9 +24,11 @@ We must have either two private subnets or two public subnets available to creat
 * Create
 
 
-## Step-2: Create a DB subnet group
+### Step-2: Create a DB subnet group
 A DB subnet group is a collection of subnets that you create in a VPC and that you then designate for your DB instances. 
-Subnets must reside in at least two different Availability Zones
+Subnets must reside in at least two different Availability Zones. If the primary DB instance of a Multi-AZ deployment fails, 
+Amazon RDS can promote the corresponding standby and subsequently create a new standby using an IP address of the subnet in one 
+of the other Availability Zones.
 
 **AWS Console** -> **Services** -> **RDS** -> **Subnet groups** -> **Create DB Subnet group***
 
@@ -51,7 +55,7 @@ We need to add a Inbound Rule in order to connect to MySQL in the private subnet
 * Create security group
 
 
-### Step-3 Create and RDS Instance
+### Step-4: Create and RDS Instance
 In the AWS Management console click on **Create database** --> **Standard Create** -> Select Engine type **MySQL** - Templates **Free Tier** -> 
 
 **Settings**:
@@ -82,7 +86,7 @@ Open **Additional Configuration**:
 * Create database
 
 
-### Step-4 Launch an EC2 instance in the public subnet
+### Step-5: Launch an EC2 instance in the public subnet
 **AWS Console** -> **Services** -> **EC2**
 * Launch instance
 * Select Ubuntu Server 18.04 
@@ -103,10 +107,9 @@ Open **Additional Configuration**:
 * Review and launch -> Launch (don't forget to download the key pair)
 
 
+### Step-6: Installing the necessary software on the EC2 instance
 
-## Step-5: Installing the necessary software on the EC2 instance
-
-#### Step-5.1: Connect to the EC2 instance
+#### Step-6.1: Connect to the EC2 instance
 
 * SSH to the instance:
     
@@ -114,18 +117,18 @@ Open **Additional Configuration**:
 
 * Upgrade OS: 
     
-    ``
+    ```
     sudo apt-get update
     sudo apt-get upgrade
-    ``
+    ```
 
 * Install packages: 
-    ``
+    ```
     sudo apt install mysql-client-core-5.7
     sudo apt install python3-pip
-    ``
+    ```
 
-#### Step-5.2: Test the connection from the EC2 to the RDS instance
+#### Step-6.2: Test the connection from the EC2 to the RDS instance
 * `` mysql -u <user> -h <host> -p``
 * Enter the password that was previously set
 * Connection was successful 
@@ -133,29 +136,28 @@ Open **Additional Configuration**:
 ![Test connection](images/step_5_2.png)
  
 
-#### Step-5.3: Clone this repository into the EC2
+#### Step-6.3: Clone this repository into the EC2
 
-``
+```
 git clone git@github.com:dianapatrong/aws-tutorials.git
-``
+```
 
-### Step-5.4: Install the required python packages
+#### Step-6.4: Install the required python packages
 
 ``
 cd aws-tutorials/rds-connect
 pip3 install -r requirements.txt
-
 ``
 
-#### Step-5.5: Environment variables
+#### Step-6.5: Environment variables
 Export the following environment variables in order to not store the user and password in the repository:
 
-``
+```
 export rds_user=<user>
 export rds_password=<password>
-``
+```
  
-### Step-6: Run the python script
+### Step-7: Run the python script
 The script **load_data.py** will connect to the RDS instance database, create the table **WORLD_CUP** if it does not exists 
 and will load the data from the CSV file into the table in RDS
 
@@ -163,31 +165,19 @@ and will load the data from the CSV file into the table in RDS
 python3 load_data.py
 ```
 
-### Step-7: Query data from jupiter notebook
+### Step-8: Query data from jupiter notebook
 
 * Install Jupyter Notebook
-``
+```
 wget https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh
 bash Anaconda3-2019.03-Linux-x86_64.sh
 export PATH=/home/ubuntu/anaconda3/bin:$PATH
-``
-
-Create a password for jupyter notebook
-
-``` 
-from IPython.lib import passwd
-passwd()
 ```
 
 * Create a config profile
 ```
 jupyter notebook --generate-config
 ```
-
-
-You will be prompted to enter and re-enter your password. IPython will then generate a hash output, COPY THIS AND SAVE IT FOR LATER. We will need this for our configuration file.
-'sha1:4afbf8db3576:9060d88d6f5d3948ae29e2302a7f76318bde4c2b'
-
 
 * Start Jupyter Notebook 
 ```
@@ -201,5 +191,15 @@ jupyter notebook --ip=0.0.0.0 --port=8888
 
 ![Token](images/token.png)
 
-
 * Open the Notebook **Connect-RDS-public-instance.ipynb** and run it 
+
+
+## Architecture
+
+![Achitecture](images/rds-architecture.png)
+
+
+## Clean-up
+
+* Terminate the EC2 instance
+* Delete RDS Instance

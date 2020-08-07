@@ -104,7 +104,7 @@ Open **Additional Configuration**:
 
 
 
-## Step-5: 
+## Step-5: Installing the necessary software on the EC2 instance
 
 #### Step-5.1: Connect to the EC2 instance
 
@@ -133,13 +133,73 @@ Open **Additional Configuration**:
 ![Test connection](images/step_5_2.png)
  
 
+#### Step-5.3: Clone this repository into the EC2
 
+``
+git clone git@github.com:dianapatrong/aws-tutorials.git
+``
 
-Export the environment variables in order to not store the user and password in the repository:
+### Step-5.4: Install the required python packages
+
+``
+cd aws-tutorials/rds-connect
+pip3 install -r requirements.txt
+
+``
+
+#### Step-5.5: Environment variables
+Export the following environment variables in order to not store the user and password in the repository:
+
 ``
 export rds_user=<user>
 export rds_password=<password>
 ``
  
+### Step-6: Run the python script
+The script **load_data.py** will connect to the RDS instance database, create the table **WORLD_CUP** if it does not exists 
+and will load the data from the CSV file into the table in RDS
+
+```
+python3 load_data.py
+```
+
+### Step-7: Query data from jupiter notebook
+
+* Install Jupyter Notebook
+``
+wget https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh
+bash Anaconda3-2019.03-Linux-x86_64.sh
+export PATH=/home/ubuntu/anaconda3/bin:$PATH
+``
+
+Create a password for jupyter notebook
+
+``` 
+from IPython.lib import passwd
+passwd()
+```
+
+* Create a config profile
+```
+jupyter notebook --generate-config
+```
+
+
+You will be prompted to enter and re-enter your password. IPython will then generate a hash output, COPY THIS AND SAVE IT FOR LATER. We will need this for our configuration file.
+'sha1:4afbf8db3576:9060d88d6f5d3948ae29e2302a7f76318bde4c2b'
+
+
+* Start Jupyter Notebook 
+```
+jupyter notebook --ip=0.0.0.0 --port=8888
+```
  
- 
+![Jupyter Notebook running](images/jupyter-connect.png)
+
+* Go to ```http://{your-ec2-public-ip}:8888```
+* Enter the token displayed when your Jupyter Notebook started
+
+![Token](images/token.png)
+
+
+* Open the Notebook **Connect-RDS-public-instance.ipynb** and run it 

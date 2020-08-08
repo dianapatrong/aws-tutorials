@@ -22,7 +22,7 @@ to point the traffic to the NAT Gateway.
 * Choose the **subnet** (must be the public subnet we just created): Tutorial Public Subnet
 * Click on **Allocate Elastic IP**
 * Create NAT gateway
-
+---
 ### Step-2: Route Table for private instansce
 **AWS Console** -> **Services** -> **VPC** -> **Route Tables**
 Go to the **Tutorial RT for Private Subnet** route table:
@@ -34,7 +34,7 @@ Go to the **Tutorial RT for Private Subnet** route table:
 * Save routes
 
 * Go to the subnet, click on **Edit route table association** and select the **Tutorial RT for Private Subnet**
-
+---
 
 ### Step-3: EC2 Instances
 We need two instances, one in the public subnet and one in the private subnet: 
@@ -72,7 +72,7 @@ For the private EC2 instance:
     | SSH       | TCP      | 22         | my-sg-for-public-instance |
     | HTTP      | TCP      | 80         | 0.0.0.0/0                 |
 * Review and launch -> Launch (don't forget to download the key pair)
-
+---
 
 ### Step-4: SSH Agent Forwarding
 Amazon instances require SSH keys for authentication, and we will need it to connect to the private instance as we do on 
@@ -90,6 +90,7 @@ That's not really a good idea, as you'd be sharing your local SSH keys with ever
 They won't have direct access to the keys, but they will be able to use them as you while the connection is established. 
 You should only add servers you trust and that you intend to use with agent forwarding.
 
+---
 ### Step-5: ssh into the instances
 * ssh into your public instance using the key `ssh -i "key_pair.pem" ec2-user@public-instance`
 * ssh into the private instance within the public one  `ssh ec2-user@private-instance`

@@ -23,6 +23,7 @@ We must have either two private subnets or two public subnets available to creat
 * Specify an **IPv4 CIDR** block for the subnet from the range of your VPC: 10.0.3.0/24
 * Create
 
+---
 
 ### Step-2: Create a DB subnet group
 A DB subnet group is a collection of subnets that you create in a VPC and that you then designate for your DB instances. 
@@ -39,6 +40,7 @@ of the other Availability Zones.
 * **Subnets**: Select only the 2 private subnets
 * Create
 
+---
 ### Step-3: Create a Security Group for the RDS instance in the private subnet
 We need to add a Inbound Rule in order to connect to MySQL in the private subnet from the public subnet.
 **AWS Console** -> **Services** -> **EC2** --> **Security Groups** -> **Create security group**
@@ -53,7 +55,7 @@ We need to add a Inbound Rule in order to connect to MySQL in the private subnet
     | MySQL/Aurora | TCP      | 3306       | 10.0.1.0/24 (our public subnet)|
 
 * Create security group
-
+---
 
 ### Step-4: Create and RDS Instance
 In the AWS Management console click on **Create database** --> **Standard Create** -> Select Engine type **MySQL** - Templates **Free Tier** -> 
@@ -85,7 +87,7 @@ Open **Additional Configuration**:
 * Keep default settings for the other options
 * Create database
 
-
+---
 ### Step-5: Launch an EC2 instance in the public subnet
 **AWS Console** -> **Services** -> **EC2**
 * Launch instance
@@ -106,7 +108,7 @@ Open **Additional Configuration**:
 
 * Review and launch -> Launch (don't forget to download the key pair)
 
-
+---
 ### Step-6: Installing the necessary software on the EC2 instance
 
 #### Step-6.1: Connect to the EC2 instance
@@ -156,7 +158,8 @@ Export the following environment variables only for the sake of not storing the 
 export rds_user=<user>
 export rds_password=<password>
 ```
- 
+
+---
 ### Step-7: Run the python script
 The script **load_data.py** will connect to the RDS instance database, create the table **WORLD_CUP** if it does not exists 
 and will load the data from the CSV file into the table in RDS
@@ -165,6 +168,7 @@ and will load the data from the CSV file into the table in RDS
 python3 load_data.py
 ```
 
+---
 ### Step-8: Query data from jupiter notebook
 
 * Install Jupyter Notebook

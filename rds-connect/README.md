@@ -47,10 +47,10 @@ We need to add a Inbound Rule in order to connect to MySQL in the private subnet
 * **Description**: Allow MySQL traffic on port 3306 
 * **VPC**: Tutorials_VPC
 * Rules: 
-    
-| Type      | Protocol | Port Range | Source    |
-| :---:     |   :---:  | :---:      | :---      |
-| MySQL/Aurora       | TCP      | 3306         | 10.0.1.0/24 (our public subnet)|
+                
+    | Type         | Protocol | Port Range | Source                         |
+    | :---:        |   :---:  | :---:      | :---                           |
+    | MySQL/Aurora | TCP      | 3306       | 10.0.1.0/24 (our public subnet)|
 
 * Create security group
 
@@ -97,12 +97,12 @@ Open **Additional Configuration**:
 * Choose a **Name tag**: EC2 in public subnet -> Next: Configure Security Groups
 * **Security Group Name**: my-sg-for-ec2-in-public-subnet
 * **Description**: allow SSH connection IN and all traffic OUT 
-* Rules 
-
-| Type      | Protocol | Port Range | Source    |
-| :---:     |   :---:  | :---:      | :---      |
-| SSH       | TCP      | 22         | 0.0.0.0/0 |
-| Custom TCP| TCP      | 8888       | 0.0.0.0/0 |
+* Rules:
+    
+    | Type      | Protocol | Port Range | Source    |
+    | :---:     |   :---:  | :---:      | :---      |
+    | SSH       | TCP      | 22         | 0.0.0.0/0 |
+    | Custom TCP| TCP      | 8888       | 0.0.0.0/0 |
 
 * Review and launch -> Launch (don't forget to download the key pair)
 

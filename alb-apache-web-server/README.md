@@ -21,7 +21,7 @@ Select the **Another Public Subnet for ALB** subnet:
 * Select the **Tutorial RT for Public Subnet** (which has the internet gateway)
 * Save
 ---
-## Step-2: Launch two EC2 instance in a public subnet
+## Step-2: Launch two EC2 instances in a public subnet
 **AWS Console** -> **Services** -> **EC2** -> **Launch instance**
 
 * Select Amazon Linux 2 AMI 

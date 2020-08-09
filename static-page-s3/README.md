@@ -1,5 +1,7 @@
 # Host a static website on Amazon s3
+Host a static website with an image/video on Amazon s3 
 
+## Step-by-step
 
 ### Step-1: Create a bucket on the aws console
 **AWS console** -> **Service** -> **S3** ->  **Create bucket**

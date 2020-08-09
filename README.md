@@ -14,7 +14,7 @@ Access to a MySQL RDS instance from Python, create a table and insert records
 Host two identical web pages that display their respective IP on two EC2 instances behind an ELB so when the page is refreshed 
 you get the first page sometimes and the second page other times. 
 
-## [EC2 user data with S3](ec2-user-data-s3-site)
+## [Copy S3 file with EC2 User Data ](ec2-user-data-s3-site)
 Using user data, at launch get a php page from S3 and move it to the irght folder to be dipslayed. S3 bucket should NOT be public.
 
 ## Pre-requisites for most tutorials:

@@ -1,12 +1,13 @@
 # Jumpbox Architecture
 
 A jumpbox (also called "jump servers") are often used as a best practice for accessing to a private network from an external network. 
-For example, your system might include an application host that is not intended to be publicly accessible. To access it for product updates or managing system patches, you typically log in to a bastion host and then access (or “jump to”) the application host from there.
+For example, your system might include an application host that is not intended to be publicly accessible. 
+To access it for product updates or managing system patches, you typically log in to a bastion host and then access (or "jump to") the application host from there.
 
-## Connecting to a private subnet
-Instances within the same VPC can connect to one another through their private IP address, and therefore it is possible 
-to connect to an instance in a private subnet from an instance in a public subnet, the goal for this tutorial is to ping google.com
+**Goal**: Instances within the same VPC can connect to one another through their private IP address, and therefore it is possible 
+to connect to an instance in a private subnet from an instance in a public subnet, the goal for this tutorial is to ping `google.com`
 from an instance in a private subnet. 
+Use two EC2 instances (1 public, 1 private), use the public EC2 as a jump box to access the private EC2 instance and ping google.com from it.
 
 ## Step-by-step
 This guide assumes that a VPC, public and private subnet have already been created, refer to the documentation: [Pre-requisites](../README.md). 

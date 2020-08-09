@@ -10,7 +10,7 @@ Create an Amazon S3 bucket to host a static webpage that displays an image
 ## [Connect to RDS instance with Python](rds-connect)
 Access to a MySQL RDS instance from Python, create a table and insert records 
 
-## [Application Load Balancer w/Apache Web Server](alb-apache-web-server)
+## [Application Load Balancer w/Apache Web Server EC2's](alb-apache-web-server)
 Host two identical web pages that display their respective IP on two EC2 instances behind an ELB so when the page is refreshed 
 you get the first page sometimes and the second page other times. 
 

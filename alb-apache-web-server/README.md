@@ -1,4 +1,4 @@
-# Application Load Balancer w/Apache Web Server
+# Application Load Balancer w/Apache Web Server EC2's
 
 Using two EC2 instances, host two identical web pages that display their respective IP behind an ELB so when the page is refreshed 
 you get the first page sometimes and the second page other times. 
@@ -6,7 +6,22 @@ you get the first page sometimes and the second page other times.
 ## Step-by-step
 This guide assumes that a VPC, public and private subnet have already been created, refer to the documentation: [Pre-requisites](../README.md). 
 
-## Step-1: Launch an EC2 instance in the public subnet
+## Step-1: Create another Public Subnet
+**AWS Console** -> **Services** -> **VPC** -> Subnet
+* Create subnet
+* Choose **Name Tag**: Another Public Subnet for ALB
+* Choose the **VPC**: Tutorials_VPC
+* Choose an **availability zone**: us-east-1a
+* Specify an **IPv4 CIDR** block for the subnet from the range of your VPC: 10.0.1.0/24
+* Create
+
+Select the **Another Public Subnet for ALB** subnet:
+* Click on **Route Table**
+* Click on  **Edit route table association**
+* Select the **Tutorial RT for Public Subnet** (which has the internet gateway)
+* Save
+---
+## Step-2: Launch two EC2 instance in a public subnet
 **AWS Console** -> **Services** -> **EC2** -> **Launch instance**
 
 * Select Amazon Linux 2 AMI 
@@ -40,28 +55,13 @@ In **User data** input the following :
 | SSH       | TCP      | 22         | 0.0.0.0/0 |
 | HTTP      | TCP      | 80         | 0.0.0.0/0 |
 
-
+> **NOTE**: Repeat this steps to have another EC2 instance but this time use **Another Public Subnet for ALB** for **Subnet**
 ---
-## Step-2: Test connection 
+## Step-3: Test connection 
 Test that both of your instances are displaying its ip by pasting their public IP address into your browser
 
 ![Test connection](images/test-connection.png)
 
----
-## Step-3: Public Subnet
-**AWS Console** -> **Services** -> **VPC** -> Subnet
-* Create subnet
-* Choose **Name Tag**: Another Public Subnet for ALB
-* Choose the **VPC**: Tutorials_VPC
-* Choose an **availability zone**: us-east-1a
-* Specify an **IPv4 CIDR** block for the subnet from the range of your VPC: 10.0.1.0/24
-* Create
-
-Select the **Another Public Subnet for ALB** subnet:
-* Click on **Route Table**
-* Click on  **Edit route table association**
-* Select the **Tutorial RT for Public Subnet** (which has the internet gateway)
-* Save
 ---
 ## Step-4: Application Load Balancer setup
 **AWS Console** -> **Services** -> **EC2** -> **Load Balancers** -> **Create Load Balancer**
@@ -137,3 +137,10 @@ Copy the DNS name from the basic configuration in the Load Balancer to the brows
 ![Instance A](images/instance-a.png)
 ![Instance B](images/instance-b.png)
 
+
+## Cleanup
+* Delete EC2 instances
+* Delete the Application Load Balancer
+
+## Architecture
+![EC2 ALB Architecture](images/ec2-alb-architecture.png)

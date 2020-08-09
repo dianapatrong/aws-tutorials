@@ -1,11 +1,15 @@
-# Copy S3 file with EC2 User Data 
+# Copy S3 file with EC2 User Data (Part 1)
 Use EC2 **User Data** to install an Apache Web Server with PHP and copy a php file from a **non-public** S3 bucket.
+
+
+## Step-by-step
+This guide assumes that a VPC, public and private subnet have already been created, refer to the documentation: [Pre-requisites](../README.md). 
 
 
 ### Step-1: Create a bucket on the aws console
 **AWS console** -> **Service** -> **S3** ->  **Create bucket**
 
-* **Bucket name**: website-hosting
+* **Bucket name**: site-for-ec2-user-data
 * **Region**: US East (N.Virginia)
  -[x] Block all pubic access 
 * Keep all other settings as default 
@@ -81,9 +85,7 @@ Grab the public ip from your EC2 instance and try it in your browser `{your-ec2-
 ## Architecture
 ![EC2 S3 Architecture](images/ec2-s3-architecture.png)
 
-TODO: Write a Script in Python that launches an instance, attach use data and does the previous task: 
-Services: 
-IAM
-Boto3
-Secret Key
-Access Key 
+
+## EXTRA: Do it with Python!
+Write a script in Python that does what we have previously done.  
+[Copy S3 file with EC2 User Data using Python (Part 2)](../ec2-user-data-s3-site-python/)

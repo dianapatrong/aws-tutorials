@@ -14,12 +14,15 @@ Access to a MySQL RDS instance from Python, create a table and insert records
 Host two identical web pages that display their respective IP on two EC2 instances behind an ELB so when the page is refreshed 
 you get the first page sometimes and the second page other times. 
 
-## [Copy S3 file with EC2 User Data ](ec2-user-data-s3-site)
-Using user data, at launch get a php page from S3 and move it to the irght folder to be dipslayed. S3 bucket should NOT be public.
+## [Copy S3 file with EC2 User Data (Part 1) ](ec2-user-data-s3-site)
+Using EC2 user data at launch copy a php file from S3 and move it to the right folder to be displayed. S3 bucket should NOT be public.
 
-## Pre-requisites for most tutorials:
+## [Copy S3 file with EC2 User Data using Python (Part 2)](ec2-user-data-s3-site-python)
+With a Python script launch and EC2 instance with user data, copy a php file from S3 and move it to the right folder to be displayed. S3 bucket should NOT be public.
 
-## Networking: VPC & Internet Gateway
+# Pre-requisites
+
+## Networking, VPC & Internet Gateway
 
 ### Step-1: VPC
 Virtual Private cloud, is an isolated section of the AWS cloud where you can provision your infrastructure. 
@@ -44,6 +47,7 @@ Choose the **internet gateway** -> **Actions** > **Attach to VPC** -> Select **T
 
 ### Step-3: Public Subnet
 Subnets are segments or partitions of a network divided by CIDR range.
+
 **AWS Console** -> **Services** -> **VPC** -> Subnet
 * Create subnet
 * Choose **Name Tag**: Tutorial Public Subnet
@@ -63,13 +67,14 @@ connected to the NAT Gateway and the public subnet is connected to the internet 
 * Create
 
 Go to the **Tutorial RT for Public Subnet** route table:
+
 * Click on **Routes** tab -> **Edit routes**
 * Click on **Add route** 
 * Input 0.0.0.0/0 on the **destination** 
 * On the **target** select **Internet Gateway** and the internet gateway my-tutorials-internet-gateway
 * Save routes
-        
-* Go to the subnet, click on **Edit route table association** and select the **Tutorial RT for Public Subnet**
+
+Go to the subnet, click on **Edit route table association** and select the **Tutorial RT for Public Subnet**
 
 
 ### Step-5: Private Subnet

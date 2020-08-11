@@ -20,7 +20,7 @@ Using EC2 user data at launch copy a php file from S3 and move it to the right f
 ## [Copy S3 file with EC2 User Data using Python (Part 2)](ec2-user-data-s3-site-python)
 With a Python script launch and EC2 instance with user data, copy a php file from S3 and move it to the right folder to be displayed. S3 bucket should NOT be public.
 
-## [Upload/download S3 files to EC2 using Python](s3-ec2-file-processing)
+## Upload/download S3 files to EC2 using Python] (WIP)
 Write a Python script that uploads a file into s3, launches an EC2 instance and downloads the file into it, do some processing with the file and upload it
  back to s3 and shut down the EC2 instance
 

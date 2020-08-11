@@ -71,7 +71,7 @@ Use the default values for **DB instance size**, **Storage** and **Availability 
 **Connectivity**
 * **VPC**: Choose Tutorials_VPC (The VPC must have subnets in different Availability Zones)
 * Open **Additional connectivity configuration**
-* Select **my-rds-tutorial-subnet-grou** (Step-2)
+* Select **my-rds-tutorial-subnet-group** (Step-2)
 * **Publicly accessible**: No
 * **VPC Security group**: Create new 
 ** **Security group name**: rds-tutorial-sg (Step-3)
@@ -84,6 +84,11 @@ Use the default values for **DB instance size**, **Storage** and **Availability 
 
 Open **Additional Configuration**:
 * Initial database name: tutorial
+* Backup
+    - [] Enable automatic backups
+    - [] Copy tags to snapshots
+* Maintenance
+    - [] Enable auto minor version upgrade
 * Keep default settings for the other options
 * Create database
 

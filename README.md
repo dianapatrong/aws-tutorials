@@ -6,6 +6,8 @@ From an Amazon EC2 instance in a private subnet of a VPC, try to communicate sec
 ## [Static website on S3](static-page-s3)
 Create an Amazon S3 bucket to host a static webpage that displays an image
 
+## [Setup Jupyter Notebook on EC2](jupyter-notebook-ec2)
+
 ## [Connect to RDS instance with Python](rds-connect)
 Access to a MySQL RDS instance from Python, create a table and insert records 
 

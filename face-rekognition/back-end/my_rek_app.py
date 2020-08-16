@@ -58,7 +58,7 @@ def save_uri_as_jpeg(uri, image_name):
 
 def upload_to_S3(image_name):
     mys3 = boto3.resource('s3', region_name='us-east-1')
-    my_bucket = mys3.Bucket('image-for-reko')
+    my_bucket = mys3.Bucket('face-rekognition-app')
     myobject = my_bucket.Object(image_name)
     myobject.delete()
     myobject.wait_until_not_exists()
@@ -73,7 +73,7 @@ def AWSdetect_faces(image_name):
     response = reko.detect_faces(
         Image={
             'S3Object': {
-                'Bucket': 'image-for-reko',
+                'Bucket': 'face-rekognition-app',
                 'Name': image_name,
             }
         },
@@ -90,13 +90,13 @@ def AWScomparefaces():
     response = reko.compare_faces(
         SourceImage={
             'S3Object': {
-                'Bucket': 'image-for-reko',
+                'Bucket': 'face-rekognition-app',
                 'Name': 'image1.jpg',
             }
         },
         TargetImage={
             'S3Object': {
-                'Bucket': 'image-for-reko',
+                'Bucket': 'face-rekognition-app',
                 'Name': 'image2.jpg',
             }
         },

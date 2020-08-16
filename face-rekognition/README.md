@@ -6,7 +6,7 @@ This guide assumes that a VPC, public and private subnet have already been creat
 We must have either two private subnets or two public subnets available to create a DB subnet group for a DB instance to use in a VPC. 
 
 
-### Step-1: Front-end 
+### Step-1: Front-end
 #### Step-1.1: Launch EC2 w/Ubuntu and Apache on it
 **AWS Console** -> **Services** -> **EC2** -> **Launch instance**
 
@@ -54,11 +54,20 @@ in your browser (`chrome://flags/#unsafely-treat-insecure-origin-as-secure`)
 
 > NOTE: To avoid this step you need to create a certificate for the site 
 
+### Step-2: Create S3 bucket
+**AWS console** -> **Service** -> **S3** ->  **Create bucket**
+
+* **Bucket name**: face-rekognition-app
+* **Region**: US East (N.Virginia)
+ -[x] Block all pubic access 
+* Keep all other settings as default 
+* **Create bucket**
+
+> NOTE: In the python file **my_rek_app.py** change the bucket name for the one you have defined 
 
 
-
-### Step-2: Back-end
-#### Step-2.1: Launch EC2 w/Ubuntu and Python
+### Step-3: Back-end
+#### Step-3.1: Launch EC2 w/Ubuntu and Python
 **AWS Console** -> **Services** -> **EC2** -> **Launch instance**
 
 * Select Ubuntu Server 18.04 LTS 
@@ -82,7 +91,7 @@ In **User data** input the following :
      pip install -r requirements.txt
      nohup python my_rek_app.py &
         
-> NOTE: EC2 User Data is automatically run with the **sudo** command.
+> NOTE: If you need to stop your flask service `pgrep  python` and `sudo kill -9 <PID>`
 
 
 * Click on **Next: Add Storage** -> **Next: Add Tags**
@@ -97,6 +106,22 @@ In **User data** input the following :
 | SSH       | TCP      | 22         | 0.0.0.0/0 |
 | Custom TCP| TCP      | 5000       | 0.0.0.0/0 |
 
+> NOTE: Port 5000 is opened because is the one used by flask (defined in the python file)
 
-### Step-3: Link front-end with back-end
+
+### Step-4: Link front-end with back-end
+
+* Go to the front-end instance 
+
+    `ssh -i "your_key.pem" ubuntu@front-end-ec2-public-ip`
+
+* Change the IP of the server in `/var/www/html/static/index.js`
+  
+  `sudo vi /var/www/html/static/index.js`
+  
+  Replace `'IP of your Server'` with the public ip of the EC2 instance for the back-end
+  
+  
+
+
 

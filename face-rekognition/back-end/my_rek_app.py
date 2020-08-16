@@ -2,29 +2,28 @@ from flask import Flask, request
 from flask_cors import CORS
 from binascii import a2b_base64
 import boto3
-import json
 
 app = Flask(__name__)
 CORS(app)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 
-
 @app.route("/get_picture1/", methods=['GET', 'POST'])
 def p1():
-    return getpicture(1)
+    return get_picture(1)
 
 
 @app.route("/get_picture2/", methods=['GET', 'POST'])
 def p2():
-    return getpicture(2)
+    return get_picture(2)
+
 
 @app.route("/", methods=['GET', 'POST'])
-def testRoute():
-    return "test"
+def test_route():
+    return "This is a test "
 
 
-def getpicture(myid):
+def get_picture(myid):
     rdata = request.get_data()
     image_name = 'image' + str(myid) + '.jpg'
     save_uri_as_jpeg(rdata, image_name)
@@ -49,33 +48,33 @@ def comparepicture():
     return answer
 
 
-def save_uri_as_jpeg(uri, imagename):
+def save_uri_as_jpeg(uri, image_name):
     imgData = str(uri)
     imgData64 = imgData[imgData.find(',') + 1:]
     binary_data = a2b_base64(imgData64)
-    with open(imagename, 'wb') as fd:
+    with open(image_name, 'wb') as fd:
         fd.write(binary_data)
 
 
-def upload_to_S3(imagename):
-    mys3 = boto3.resource('s3',region_name='us-east-1')
-    mybucket = mys3.Bucket('image-for-reko')
-    myobject = mybucket.Object(imagename)
+def upload_to_S3(image_name):
+    mys3 = boto3.resource('s3', region_name='us-east-1')
+    my_bucket = mys3.Bucket('image-for-reko')
+    myobject = my_bucket.Object(image_name)
     myobject.delete()
     myobject.wait_until_not_exists()
     print("deleted")
-    myobject.upload_file(imagename)
+    myobject.upload_file(image_name)
     myobject.wait_until_exists()
     print("uploaded")
 
 
-def AWSdetect_faces(imagename):
+def AWSdetect_faces(image_name):
     reko = boto3.client('rekognition',region_name='us-east-1')
     response = reko.detect_faces(
         Image={
             'S3Object': {
                 'Bucket': 'image-for-reko',
-                'Name': imagename,
+                'Name': image_name,
             }
         },
         Attributes=[

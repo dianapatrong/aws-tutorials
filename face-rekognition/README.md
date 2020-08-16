@@ -58,7 +58,7 @@ in your browser (`chrome://flags/#unsafely-treat-insecure-origin-as-secure`)
 
 
 ### Step-2: Back-end
-#### Step-2.1: Launch EC2 w/Ubuntu and Conda on it
+#### Step-2.1: Launch EC2 w/Ubuntu and Python
 **AWS Console** -> **Services** -> **EC2** -> **Launch instance**
 
 * Select Ubuntu Server 18.04 LTS 
@@ -69,35 +69,19 @@ in your browser (`chrome://flags/#unsafely-treat-insecure-origin-as-secure`)
 
 #### Advanced details: 
 In **User data** input the following : 
-
-    #!/bin/bash
-    apt-get update -y
-    wget https://repo.anaconda.com/archive/Anaconda3-2020.07-Linux-x86_64.sh
-    bash Anaconda3-2020.07-Linux-x86_64.sh -b  -p /home/ubuntu/anaconda3
-    export PATH=/home/ubuntu/anaconda3/bin:$PATH
-    source ~/.bashrc
-    cd /home/ubuntu/
-    git clone https://github.com/dianapatrong/aws-tutorials.git
-    cd aws-tutorials/face-rekognition/back-end
-    conda init bash
-    conda create --name flask_venv python=3
-    conda activate flask_venv
-    conda install -y Flask
-    conda install -y flask-cors 
-    conda install -y boto3
-     
   
      #!/bin/bash
      apt-get update -y
+     cd /home/ubuntu/
      git clone https://github.com/dianapatrong/aws-tutorials.git
+     cd aws-tutorials/face-rekognition/back-end
      apt install python3
      apt-get install -y python3-venv
      python3 -m venv flask_venv
      source flask_venv/bin/activate
      pip install -r requirements.txt
-     
-     
-     
+     nohup python my_rek_app.py &
+        
 > NOTE: EC2 User Data is automatically run with the **sudo** command.
 
 
@@ -111,8 +95,8 @@ In **User data** input the following :
 | Type      | Protocol | Port Range | Source    |
 | :---:     |   :---:  | :---:      | :---      |
 | SSH       | TCP      | 22         | 0.0.0.0/0 |
-| Custom TCP| TCP      | 8888       | 0.0.0.0/0 |
-
+| Custom TCP| TCP      | 5000       | 0.0.0.0/0 |
 
 
 ### Step-3: Link front-end with back-end
+

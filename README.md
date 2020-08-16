@@ -23,10 +23,11 @@ Using EC2 user data at launch copy a php file from S3 and move it to the right f
 With a Python script launch and EC2 instance with user data, copy a php file from S3 and move it to the right folder to be displayed. S3 bucket should NOT be public.
 
 ## [Upload/download S3 files to EC2 using Python](s3-ec2-copy-file-python)
-Write a Python script that uploads a file into s3, launches an EC2 instance and downloads the file into it, do some processing with the file and upload it
- back to s3 and shut down the EC2 instance
+Write a Python script that uploads a file into S3, launches an EC2 instance and downloads the file into it, do some processing with the file and upload it
+ back to S3 and shut down the EC2 instance
 
-
+## [API interface for AWS Face Rekognition](face-rekognition)
+Setup an API interface for AWS face Rekognition
 
 ## To do: 
 * [Unicorn web app](unicorn-serverless-web-app) 

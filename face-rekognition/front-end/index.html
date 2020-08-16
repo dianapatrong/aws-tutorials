@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="static/index.css">
+        <link rel="stylesheet" href="static/bootstrap.min.css">
+        <title>AWS Rekognition</title>
+    </head>
+
+    <body>
+
+        <script type="text/javascript" src="static/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="static/bootstrap.min.js"></script>	
+	<script type="text/javascript" src="static/webcam.js"></script>
+	<script src="static/index.js"></script>
+
+        <div id="PAGE" class="container-fluid ">
+            <div class="row bg-primary ">
+                <div class="mx-auto h3"> AWS Rekognition Test </div>
+            </div>
+            <div class="row justify-content-end">
+                <div id="compare" class="mx-auto h2"></div>
+            </div>
+            <div class="row">
+                <div class="col-3 mx-1">
+                    <div class="row justify-content-center m-2">
+                        <div id="my_camera"></div>
+                    </div>
+                    <div class="row justify-content-center m-2">
+                        <input class="btn btn-info m-1" type=button value="Take Snapshot 1" onClick="take_snapshot(1)">
+                        <input class="btn btn-info m-1" type=button value="Take Snapshot 2" onClick="take_snapshot(2)">
+                        <input class="btn btn-success m-1" type=button value="Compare pics" onClick="rekognize()">
+                    </div>
+                </div>
+
+                <div class="col-4 mx-1">
+                    <div class="row justify-content-center m-2">
+                        <div id="screenshot1"></div>
+                    </div>
+                    <div class="row justify-content-center m-2">
+                        <div id="results1"></div>
+                    </div>
+                </div>
+
+                <div class="col-4 mx-1">
+                    <div class="row justify-content-center m-2">
+                        <div id="screenshot2"></div>
+                    </div>
+                    <div class="row justify-content-center m-2">
+                        <div id="results2"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+		<script language="JavaScript">
+			 set_webcam()
+		</script>
+
+    </body>
+</html>

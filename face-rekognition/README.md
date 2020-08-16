@@ -65,9 +65,25 @@ in your browser (`chrome://flags/#unsafely-treat-insecure-origin-as-secure`)
 
 > NOTE: In the python file **my_rek_app.py** change the bucket name for the one you have defined 
 
+### Step-3: Create an IAM Role 
+We need to authorize the EC2 instance to access the bucket in S3 and access to Rekognition
 
-### Step-3: Back-end
-#### Step-3.1: Launch EC2 w/Ubuntu and Python
+**AWS Console** -> **Services** -> **IAM** -> **Roles** -> **Create role**
+
+* Select type of trusted entity: AWS Service
+* Choose a use case: EC2
+* Select your use case: Allows EC2 instances to call AWS services on your behalf
+* Click on **Next: Permissions**
+* Attach permissions policy: 
+    - [x] **AmazonS3FullAccess** 
+    - [x] **AmazonRekognitionFullAccess** 
+* **Role name**: Rekognition_S3
+* **Role description**: Rekognition App
+* Create role
+
+
+### Step-4: Back-end
+#### Step-4.1: Launch EC2 w/Ubuntu and Python
 **AWS Console** -> **Services** -> **EC2** -> **Launch instance**
 
 * Select Ubuntu Server 18.04 LTS 
@@ -75,6 +91,7 @@ in your browser (`chrome://flags/#unsafely-treat-insecure-origin-as-secure`)
 * **Network**: Tutorials_VPC
 * **Subnet**: Tutorial Public Subnet
 * **Auto-assign Public IP**: Enable
+* **IAM Role**: Rekognition_S3
 
 #### Advanced details: 
 In **User data** input the following : 
@@ -109,7 +126,7 @@ In **User data** input the following :
 > NOTE: Port 5000 is opened because is the one used by flask (defined in the python file)
 
 
-### Step-4: Link front-end with back-end
+### Step-5: Link front-end with back-end
 
 * Go to the front-end instance 
 
@@ -123,5 +140,12 @@ In **User data** input the following :
   
   
 
+### Test it! 
+Go to the public IP of your front-end EC2 instance and take pictures
+
+![Test App](images/test.png)
 
 
+## Clean up
+* Delete EC2 instances
+* Delete S3 bucket

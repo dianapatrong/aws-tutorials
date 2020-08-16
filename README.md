@@ -7,6 +7,7 @@ From an Amazon EC2 instance in a private subnet of a VPC, try to communicate sec
 Create an Amazon S3 bucket to host a static webpage that displays an image
 
 ## [Setup Jupyter Notebook on EC2](jupyter-notebook-ec2)
+Setup Jupyter Notebook on an EC2 instance
 
 ## [Connect to RDS instance with Python](rds-connect)
 Access to a MySQL RDS instance from Python, create a table and insert records 
@@ -25,6 +26,14 @@ With a Python script launch and EC2 instance with user data, copy a php file fro
 Write a Python script that uploads a file into s3, launches an EC2 instance and downloads the file into it, do some processing with the file and upload it
  back to s3 and shut down the EC2 instance
 
+
+
+## To do: 
+* [Unicorn web app](unicorn-serverless-web-app) 
+* [Analyze Big Data with Hadoop](https://aws.amazon.com/getting-started/hands-on/analyze-big-data/)
+
+
+## For more tutoriasl: [AWS Hands-on](https://aws.amazon.com/getting-started/hands-on/)
 # Pre-requisites
 
 ## Networking, VPC & Internet Gateway

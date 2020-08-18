@@ -29,7 +29,11 @@ Write a Python script that uploads a file into S3, launches an EC2 instance and 
 ## [API interface for AWS Face Rekognition](face-rekognition)
 Setup an API interface for AWS face Rekognition
 
-## To do: 
+
+
+## AWS Hands-On Tutorials:  
+* [Build a Basic Web Application](build-basic-web-app)
+Deploy a web application and add interactivity with an API and a database 
 * [Unicorn web app](unicorn-serverless-web-app) 
 * [Analyze Big Data with Hadoop](https://aws.amazon.com/getting-started/hands-on/analyze-big-data/)
 

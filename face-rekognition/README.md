@@ -3,7 +3,6 @@ Setup a simple API for face recognition using AWS Rekognition service.
 
 ## Step-by-step
 This guide assumes that a VPC, public and private subnet have already been created, refer to the documentation: [Pre-requisites](../README.md). 
-We must have either two private subnets or two public subnets available to create a DB subnet group for a DB instance to use in a VPC. 
 
 
 ### Step-1: Front-end

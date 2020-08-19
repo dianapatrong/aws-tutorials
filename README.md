@@ -29,16 +29,15 @@ Write a Python script that uploads a file into S3, launches an EC2 instance and 
 ## [API interface for AWS Face Rekognition](face-rekognition)
 Setup an API interface for AWS face Rekognition
 
-
+## Digit Recognition MNIST  (WIP) 
 
 ## AWS Hands-On Tutorials:  
-* [Build a Basic Web Application](build-basic-web-app)
-Deploy a web application and add interactivity with an API and a database 
-* [Unicorn web app](unicorn-serverless-web-app) 
+* [Build a Basic Web Application](https://aws.amazon.com/getting-started/hands-on/build-web-app-s3-lambda-api-gateway-dynamodb)
+* [Unicorn web app](https://aws.amazon.com/getting-started/hands-on/build-serverless-web-app-lambda-apigateway-s3-dynamodb-cognito) 
 * [Analyze Big Data with Hadoop](https://aws.amazon.com/getting-started/hands-on/analyze-big-data/)
 
+For more tutoriasl: [AWS Hands-on](https://aws.amazon.com/getting-started/hands-on/)
 
-## For more tutoriasl: [AWS Hands-on](https://aws.amazon.com/getting-started/hands-on/)
 # Pre-requisites
 
 ## Networking, VPC & Internet Gateway
